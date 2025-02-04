@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karlosh Thapa | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #3b5998, #192f6a);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(59, 89, 152, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .header .nav-bar {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header .nav-item {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .header .nav-item:hover {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 15px rgba(59, 89, 152, 0.7);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero img.profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: thunderbolt 4s ease-in-out;
+        }
+
+        @keyframes thunderbolt {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin: 0;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .icons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        .icons img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            animation: float 2s infinite ease-in-out;
+        }
+
+        .icons img:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: scroll;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: rgba(0, 191, 255, 0.7); /* Water-like Crystal Color */
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            z-index: 1000;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer .details {
+            flex: 1;
+            text-align: left;
+        }
+
+        .footer .details p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer .social-bar {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .footer .social-bar a {
+            color: #fff;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .footer .social-bar a:hover {
+            transform: scale(1.2);
+        }
+
+        .footer .map-container {
+            flex: 1;
+            text-align: center;
+        }
+
+        .footer .map-container iframe {
+            width: 100%;
+            max-width: 300px;
+            height: 150px;
+            border: 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1100;
+        }
+
+        .dialog input, .dialog textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .dialog button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dialog button:hover {
+            background-color: #0056b3;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1100;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .popup-content img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .popup-content p {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with logo and navigation -->
+    <div class="header">
+        <div class="logo">Karlosh Thapa</div>
+        <div class="nav-bar">
+            <div class="nav-item" onclick="scrollToSection('about-me')">About</div>
+            <div class="nav-item" onclick="scrollToSection('repositories')">Repositories</div>
+            <div class="nav-item" onclick="scrollToSection('projects')">Projects</div>
+            <div class="nav-item" onclick="scrollToSection('experience')">Experience</div>
+            <div class="nav-item" onclick="scrollToSection('contact')">Contact</div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <img class="profile-pic" src="https://scontent.fktm21-2.fna.fbcdn.net/v/t39.30808-6/438275047_1514340355825778_8425795661865479313_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=txhwl-v2DxAQ7kNvgEZPsYd&_nc_zt=23&_nc_ht=scontent.fktm21-2.fna&_nc_gid=AdsFdTNK2_Fta4U_w35RYs5&oh=00_AYDrHrVakp0F2mJ2PAjbiWsxf8YSuJkOmPQ5Wvm9GvviXg&oe=677EFD6C" alt="Karlosh Thapa">
+        <h1>Karlosh Thapa</h1>
+        <p>IT Engineering Student | Developer | Innovator</p>
+        <div class="icons">
+            <img src="https://img.icons8.com/color/80/html-5--v1.png" alt="HTML">
+            <img src="https://img.icons8.com/color/80/css3.png" alt="CSS">
+            <img src="https://img.icons8.com/color/80/javascript.png" alt="JavaScript">
+            <img src="https://img.icons8.com/color/80/php.png" alt="PHP">
+            <img src="https://img.icons8.com/color/80/mysql-logo.png" alt="MySQL">
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery">
+        <img src="https://wallpapercave.com/wp/wp5009916.jpg" alt="Tech Image">
+        <img src="https://wallpapers.com/images/hd/coding-background-9izlympnd0ovmpli.jpg" alt="Code Image">
+        <img src="https://alvarotrigo.com/blog/assets/imgs/2021-10-16/dvlpr-front-end-portfolio-example.jpeg" alt="Developer Image">
+        <img src="https://i.pinimg.com/736x/3b/8f/ad/3b8fadc3cd7234cc42c5bc2436e99923.jpg" alt="Software Image">
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <div class="details">
+            <p>Name: Karlosh Thapa</p>
+            <p>Email: karlosh@example.com</p>
+            <p>Phone: 9864050411</p>
+        </div>
+        <div class="map-container">
+            <!-- Google Maps Embed -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.3377518250413!2d85.3239603146321!3d27.717245482805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199f9d4df2c7%3A0x2d5f1c8d68e95bb7!2sKathmandu%2C%20Nepal!5e0!3m2!1sen!2snp!4v1648905416144!5m2!1sen!2snp"
+                allowfullscreen=""
+                loading="lazy"
+            ></iframe>
+        </div>
+        <div class="social-bar">
+            <a href="https://facebook.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/facebook.png" alt="Facebook"></a>
+            <a href="https://tiktok.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/tiktok.png" alt="TikTok"></a>
+            <a href="https://youtube.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/youtube.png" alt="YouTube"></a>
+            <a href="mailto:karlosh@example.com"><img src="https://img.icons8.com/ios-filled/50/gmail.png" alt="Gmail"></a>
+        </div>
+    </div>
+
+    <!-- Pop-up Details -->
+    <div class="popup" id="popup-details">
+        <div class="popup-content">
+            <img src="https://img.icons8.com/ios-filled/50/user.png" alt="User Icon">
+            <p>Name: Karlosh Thapa</p>
+            <p>Email: karlosh@example.com</p>
+            <p>Phone: 9864050411</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function openPopup() {
+            document.getElementById('popup-details').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup-details').style.display = 'none';
+        }
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+                setTimeout(() => {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                }, 300);
+            });
+        });
+
+        document.querySelectorAll('.footer .social-bar a').forEach(link => {
+            link.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'none';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
